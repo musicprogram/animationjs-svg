@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+
+<style>
+	body{
+		margin: 0;
+	}
+	.polymorph{
+		fill:#29ABE3;
+	}
+
+	#cta, #cta2{
+		position: absolute;
+		margin: 10em auto 0 auto;
+		left: 0;
+		right: 0;
+		width: 30%;
+		background: none;
+		border: 1px solid #fff;
+		border-radius: 5px;
+		padding: 15px;
+		color: #fff;
+		font-size: 1.5em;
+		cursor: pointer;
+		outline: 0;
+	}
+	
+	p{
+		font-size: 1.2em;
+	}
+
+	#cta2 {
+		width: auto;
+		margin: 30px auto;
+		background: #29ABE2;
+
+	}
+	#blip{
+		position: absolute;
+		color: #29ABE2;
+		right: 25%;
+		top: 0;
+		opacity: 0;
+		width: 30%;
+		transform: translateY(-800px);
+	}
+</style>
+<body>
+
+<button id="cta">Click Me</button>
+	
+
+<svg viewBox="0 0 215 215">
+	<polygon class="polymorph" points="215,110 0,110 0,0 47.7,0 215,0"/>
+</svg>
+
+
+
+<div id="blip">
+	<h1>well, that was revealing...</h1>
+	<p>Lorem ipsum dolor sit amet perspiciatis nemo aperiam voluptatum.</p>
+	<div id="cta2">Go back</div>
+</div>
+
+
+
+
+
+</body>
+
+
+
+<script src="./anime.js"></script>
+
+
+<script>
+
+	
+const btn = document.querySelector("#cta")
+const btn2 = document.querySelector("#cta2")
+
+btn.onclick = function(){
+	var morphing = anime({
+		  targets: '.polymorph',
+		  points: [
+		    { value: '215,110 0,110 0,0 47.7,0 67,76' },
+		    { value: '215,110 0,110 0,0 0,0 67,76 ' }
+		  ],
+		  easing: 'easeOutQuad',
+		  duration: 1200,
+		  loop: false
+		});
+
+		anime({
+		  targets: '#blip',
+		  opacity: 1,
+		  duration: 500,
+		  translateY: 150
+		});
+
+		const promise = morphing.finished.then(()=>{
+		btn2.onclick = function(){
+			var morphing = anime({
+			  targets: '.polymorph',
+			  points: [
+			    { value: '215,110 0,110 0,0 47.7,0 67,76' },
+			    { value: '215,110 0,110 0,0 47.7,0 215,0' }
+			  ],
+			  easing: 'easeOutQuad',
+			  duration: 1200,
+			  loop: false
+			});
+
+			anime({
+			  targets: '#blip',
+			  opacity: 0,
+			  duration: 500,
+			  translateY: -800
+			});
+
+		}
+
+
+
+
+		})
+}
+	
+	
+
+
+</script>
+
+
+
+
+
+</html>
